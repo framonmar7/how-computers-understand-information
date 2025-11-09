@@ -269,3 +269,26 @@ Resulting in **0011111101001010₂**.
 
 This exact correspondence between bits and digits makes octal—and especially hexadecimal—indispensable for anyone working close to hardware or debugging at a low level.  
 They are, in essence, **human-friendly representations of pure binary**, a bridge that allows engineers to read and manipulate the language of machines without getting lost in endless sequences of zeros and ones.
+
+| Binary | Decimal | Hexadecimal |
+|:-------:|:--------:|:------------:|
+| 0000 | 0  | 0 |
+| 0001 | 1  | 1 |
+| 0010 | 2  | 2 |
+| 0011 | 3  | 3 |
+| 0100 | 4  | 4 |
+| 0101 | 5  | 5 |
+| 0110 | 6  | 6 |
+| 0111 | 7  | 7 |
+| 1000 | 8  | 8 |
+| 1001 | 9  | 9 |
+| 1010 | 10 | A |
+| 1011 | 11 | B |
+| 1100 | 12 | C |
+| 1101 | 13 | D |
+| 1110 | 14 | E |
+| 1111 | 15 | F |
+
+The table above shows the equivalences between binary, decimal, and hexadecimal representations.  
+Each group of four bits corresponds to a single hexadecimal symbol, which makes it much easier to handle large binary numbers.  
+For instance, `1010₂` corresponds to `10₁₀` and is represented by the letter `A₁₆`.
