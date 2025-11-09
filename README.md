@@ -92,7 +92,6 @@ All positional systems (base 2, 8, 10, or 16) follow the same rule: each positio
 ---
 
 ![General formula of positional numeral systems](./figures/figure_1_positional_formula.png)
-*Figure 1. General formula of positional numeral systems*
 
 We can express this idea with the general formula above, which can be used to determine the value of a number in any positional system. Here, **b** represents the base, and **a₀**, **a₁**, **a₂**, … are the digits of the number, starting from the right.
 
@@ -141,7 +140,6 @@ For a software engineer, understanding how a decimal number is converted into bi
 ### 3.2.1 Successive Division Method
 
 ![Successive Division Method](./figures/figure_2_divisions_method.png)
-*Figure 2. Successive Division Method*
 
 The most common way to perform this conversion is known as the **successive division method**. The idea is simple: each time we divide a number by 2, the remainder tells us whether the corresponding binary position contains a 0 or a 1.
 
@@ -169,7 +167,6 @@ In software, this same process is what happens internally when a program or func
 ### 3.2.2 Powers of Two Method
 
 ![Powers of Two Method](./figures/figure_3_powers_of_two_method.png)
-*Figure 3. Powers of Two Method*
 
 There’s another useful approach called the **powers of two method**, which is often more intuitive for programmers who already think in terms of bits and positions.  
 The binary system is based on powers of two: **1, 2, 4, 8, 16, 32, 64, 128…** Each position represents one of these powers, and a `1` indicates that the corresponding power contributes to the total sum.
