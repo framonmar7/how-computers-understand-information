@@ -91,9 +91,8 @@ All positional systems (base 2, 8, 10, or 16) follow the same rule: each positio
 
 ---
 
-### Figure 1. General formula of positional numeral systems
-
 ![General formula of positional numeral systems](./figures/figure_1_positional_formula.png)
+*Figure 1. General formula of positional numeral systems*
 
 We can express this idea with the general formula above, which can be used to determine the value of a number in any positional system. Here, **b** represents the base, and **a₀**, **a₁**, **a₂**, … are the digits of the number, starting from the right.
 
@@ -132,3 +131,75 @@ This method works identically across all bases because positional systems share 
 From a software engineering perspective, this conversion process is not a theoretical curiosity—it’s exactly what happens inside the computer every time data moves from one representation to another. A binary value that the processor manipulates can be displayed on screen as a decimal or hexadecimal number using this same principle, applied automatically by the software.
 
 The reason why results are usually expressed in base 10 is cultural rather than technical: all our mathematical notation—tables, operations, and algorithms—is built around powers of ten. If humans had evolved with eight fingers instead of ten, our default base might have been 8. But as long as humans think in decimal and machines process in binary, base conversion will remain the bridge between human reasoning and digital computation.
+
+## 3.2 From Decimal to Binary
+
+For a software engineer, understanding how a decimal number is converted into binary is far more than a mathematical exercise. It’s about understanding how hardware interprets the data that software generates and manipulates. Every time a program stores a number in memory, the processor doesn’t keep “19” or “65” as we see them—it stores a sequence of zeros and ones that represent those same quantities precisely.
+
+---
+
+### 3.2.1 Successive Division Method
+
+![Successive Division Method](./figures/figure_2_divisions_method.png)
+*Figure 2. Successive Division Method*
+
+The most common way to perform this conversion is known as the **successive division method**. The idea is simple: each time we divide a number by 2, the remainder tells us whether the corresponding binary position contains a 0 or a 1.
+
+Let’s convert **19₁₀** into binary, step by step:
+
+```
+19 ÷ 2 = 9, remainder 1
+ 9 ÷ 2 = 4, remainder 1
+ 4 ÷ 2 = 2, remainder 0
+ 2 ÷ 2 = 1, remainder 0
+ 1 ÷ 2 = 0, remainder 1
+```
+
+Once we can’t continue dividing, we read the remainders in reverse order (from bottom to top):
+
+```
+10011₂
+```
+
+That means that the decimal number **19₁₀** is equivalent to **10011₂**.  
+In software, this same process is what happens internally when a program or function converts an integer from decimal to binary representation.
+
+---
+
+### 3.2.2 Powers of Two Method
+
+![Powers of Two Method](./figures/figure_3_powers_of_two_method.png)
+*Figure 3. Powers of Two Method*
+
+There’s another useful approach called the **powers of two method**, which is often more intuitive for programmers who already think in terms of bits and positions.  
+The binary system is based on powers of two: **1, 2, 4, 8, 16, 32, 64, 128…** Each position represents one of these powers, and a `1` indicates that the corresponding power contributes to the total sum.
+
+Let’s use **65₁₀** as an example.  
+First, we list the powers of two less than or equal to 65: **1, 2, 4, 8, 16, 32, 64**.  
+Now, we find which of them add up to 65: **64 + 1**.
+
+That means we place a `1` in the positions corresponding to **2⁶** and **2⁰**, and `0`s in all the others. Reading from left to right, we get:
+
+```
+1000001₂
+```
+
+Therefore, **65₁₀ = 1000001₂**.
+
+This brings us to a concept every software engineer should know: **each bit carries a weight determined by its position.**  
+The leftmost bit is the **MSB (Most Significant Bit)**, representing the highest power of two.  
+The rightmost bit is the **LSB (Least Significant Bit)**, representing the lowest power.
+
+In **1000001₂**, the MSB equals 64, and the LSB equals 1.
+
+This principle applies directly to data structures and computer architecture. Knowing what MSB and LSB mean is essential when dealing with **bit masks**, **bit shifting**, or **low-level data storage**.
+
+Another key idea is the **maximum representable value** with a fixed number of bits.  
+If a system uses `n` bits, the largest possible value is given by:
+
+```
+2ⁿ − 1
+```
+
+For instance, with 6 bits the maximum value is **63**, and with 7 bits it’s **127**.  
+This formula explains why certain data types in programming languages—like `int`, `short`, or `byte`—have strict upper limits: they depend directly on the number of bits reserved for storing each value.
