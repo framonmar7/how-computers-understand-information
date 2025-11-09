@@ -200,3 +200,72 @@ If a system uses `n` bits, the largest possible value is given by:
 
 For instance, with 6 bits the maximum value is **63**, and with 7 bits it’s **127**.  
 This formula explains why certain data types in programming languages—like `int`, `short`, or `byte`—have strict upper limits: they depend directly on the number of bits reserved for storing each value.
+
+## 3.3 Conversion Between Extended Binary Systems
+
+![Binary to Hexadecimal Conversion Examples](./figures/figure_4_binary_to_hexadecimal_examples.png)
+
+Although binary is the computer’s native language, using it directly is highly impractical for humans. Reading or writing long sequences of zeros and ones is error-prone and hard to interpret. For that reason, engineers and programmers use numerical systems that maintain a direct relationship with binary but are more compact and readable: **octal (base 8)** and **hexadecimal (base 16).**
+
+These systems act as **"reading shortcuts."** They are still based on binary logic but group bits so that each group corresponds to a single symbol. The key lies in the fact that both 8 and 16 are powers of 2:  
+**8 = 2³** and **16 = 2⁴.**
+
+This means that, in the octal system, every **group of three bits** represents one digit, and in the hexadecimal system, every **group of four bits** represents one digit.
+
+To understand why, let’s look at the number of possible combinations:
+
+```
+1 bit → 2 combinations → (0, 1)
+2 bits → 4 combinations → (00, 01, 10, 11)
+3 bits → 8 combinations → (000, 001, 010, 011, 100, 101, 110, 111)
+```
+
+Notice that the number of combinations produced by **three bits** exactly matches the number of symbols available in the octal system (0–7).  
+Therefore, each group of three binary bits represents exactly one octal digit. There are no overlaps or missing values—the binary combinations perfectly cover the octal range. In other words, **3 binary bits = 1 octal digit.**
+
+The same happens with hexadecimal. Four binary bits can form **16 combinations**, from `0000` to `1111`, representing values from 0 to 15. The hexadecimal system also has 16 possible symbols (0–9 and A–F). Hence, **4 binary bits = 1 hexadecimal digit.**
+
+---
+
+When converting a binary number to octal or hexadecimal, we simply group the bits into blocks of three or four (as shown in Figure 4). This relationship works perfectly because both 8 and 16 are powers of two, ensuring that the binary combinations and the symbols of those bases align exactly, without gaps or mismatches.
+
+Let’s look at an example. Suppose we have the binary number **11011010₂**.  
+If we group the bits from right to left in blocks of four and convert each block into hexadecimal, we get:
+
+```
+1101 → D
+1010 → A
+```
+
+So the result is **DA₁₆.**
+
+For octal, we group in threes:
+
+```
+011 → 3
+011 → 3
+010 → 2
+```
+
+So the result is **332₈.**
+
+Both representations correspond to the same original number; they’re just written in more human-friendly systems.
+
+---
+
+From a software engineering perspective, **hexadecimal** is especially important.  
+In most programming languages and computer architectures, memory addresses, bit masks, and even color codes are expressed in hexadecimal. This base offers a perfect balance between readability and precision since each hexadecimal digit directly maps to four bits.
+
+For example, a memory address such as **0x3F4A** can be easily expanded to binary:
+
+```
+3 → 0011
+F → 1111
+4 → 0100
+A → 1010
+```
+
+Resulting in **0011111101001010₂**.
+
+This exact correspondence between bits and digits makes octal—and especially hexadecimal—indispensable for anyone working close to hardware or debugging at a low level.  
+They are, in essence, **human-friendly representations of pure binary**, a bridge that allows engineers to read and manipulate the language of machines without getting lost in endless sequences of zeros and ones.
