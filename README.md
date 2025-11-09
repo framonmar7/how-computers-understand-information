@@ -1,5 +1,7 @@
 # How Computers Understand Information  
-**Understanding how data becomes information inside a computer.**
+### Foundations of Digital Representation for Software Engineers  
+
+> Explore how computers interpret numbers, text, and data through binary logic and positional numeral systems.
 
 ---
 
