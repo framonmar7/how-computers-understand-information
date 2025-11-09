@@ -69,3 +69,66 @@ This simplicity brings enormous advantages. Digital systems operate with electri
 
 From a software perspective, each 0 or 1 is called a **bit**, short for *binary digit*. A bit is the smallest unit of information in a digital system. While a single bit can only represent two values (0 or 1), combining them enables exponentially larger quantities of information. With 2 bits we can represent 4 possible values (00, 01, 10, 11); with 3 bits, 8 values; with 4 bits, 16 values — and so on. This ability to generate infinite combinations from just a few symbols is what makes positional systems, and the binary system in particular, so powerful.  
 
+## 3. Base Conversion
+
+Every numeral system uses a different set of symbols and its own rule for calculating the value of a number according to its base. However, all bases represent the same abstract concept: quantities or values. The only difference lies in how we write them.
+
+Changing the base means expressing the same number using a different representation system. We do not alter its real value—just like translating a sentence doesn’t change its meaning. For instance, the number we write as `10` in decimal is `1010₂` in binary and `12₈` in octal. In all three cases, it represents the same quantity, just written with different alphabets.
+
+These conversions are very common in computer science. Humans naturally think in base 10, while computers operate internally in base 2 because their hardware can only distinguish between two electrical states. For practical reasons, programmers often use bases 8 (octal) and 16 (hexadecimal) as well, since they provide a more compact and readable way to represent binary sequences.
+
+Understanding base conversion is, therefore, a fundamental skill for any software engineer. It enables us to move between the way a machine interprets data and the way we understand it, serving as a bridge between hardware-level representation and the logical world of programming.
+
+---
+
+### 3.1 From Any Base to Decimal
+
+Once we understand what it means to change bases, the next step is to learn how to convert any number into its decimal form. This operation is crucial because decimal notation is what we humans use to reason, perform calculations, and verify results—even when computers internally use other bases.
+
+When converting a number from another base to decimal, we are not changing its real value but simply rewriting it with different symbols. It’s like translating a word from one language to another—the meaning remains the same.
+
+All positional systems (base 2, 8, 10, or 16) follow the same rule: each position in the number represents a power of the base, and the total value is the sum of those powers multiplied by the digit in that position. In the decimal system, the powers are of ten (1, 10, 100, 1000…); in binary, of two (1, 2, 4, 8, 16…); in octal, of eight (1, 8, 64, 512…); and in hexadecimal, of sixteen (1, 16, 256, 4096…).
+
+---
+
+### Figure 1. General formula of positional numeral systems
+
+![General formula of positional numeral systems](./figures/figure_1_positional_formula.png)
+
+We can express this idea with the general formula above, which can be used to determine the value of a number in any positional system. Here, **b** represents the base, and **a₀**, **a₁**, **a₂**, … are the digits of the number, starting from the right.
+
+The result **N** doesn’t necessarily belong to the decimal system; it depends on the system used for the computation. If we perform the calculations in base 10, the result will appear in decimal. But if we do the math in binary, octal, or hexadecimal, it will appear in that base instead. Thus, the formula doesn’t convert to decimal by itself—it simply describes how to compute a number’s value according to its base. In practice, it’s most often applied to obtain the decimal equivalent, since that’s the notation we use in daily life.
+
+---
+
+Let’s look at some examples.
+
+**Example 1 — Binary to Decimal**
+
+```
+110₂ = (1×2²) + (1×2¹) + (0×2⁰)
+     = 4 + 2 + 0
+     = 6₁₀
+```
+
+**Example 2 — Octal to Decimal**
+
+```
+523₈ = (5×8²) + (2×8¹) + (3×8⁰)
+     = 320 + 16 + 3
+     = 339₁₀
+```
+
+**Example 3 — Hexadecimal to Decimal**
+
+```
+1A₁₆ = (1×16¹) + (10×16⁰)
+     = 16 + 10
+     = 26₁₀
+```
+
+This method works identically across all bases because positional systems share the same structure: only the base and the available symbols differ.
+
+From a software engineering perspective, this conversion process is not a theoretical curiosity—it’s exactly what happens inside the computer every time data moves from one representation to another. A binary value that the processor manipulates can be displayed on screen as a decimal or hexadecimal number using this same principle, applied automatically by the software.
+
+The reason why results are usually expressed in base 10 is cultural rather than technical: all our mathematical notation—tables, operations, and algorithms—is built around powers of ten. If humans had evolved with eight fingers instead of ten, our default base might have been 8. But as long as humans think in decimal and machines process in binary, base conversion will remain the bridge between human reasoning and digital computation.
