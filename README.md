@@ -292,3 +292,61 @@ They are, in essence, **human-friendly representations of pure binary**, a bridg
 The table above shows the equivalences between binary, decimal, and hexadecimal representations.  
 Each group of four bits corresponds to a single hexadecimal symbol, which makes it much easier to handle large binary numbers.  
 For instance, `1010₂` corresponds to `10₁₀` and is represented by the letter `A₁₆`.
+
+## 3.4 Representation and Rounding of Fractional Numbers
+
+Up to this point, we’ve worked with integers, but digital systems also need to represent quantities that include fractional parts. The underlying principle remains the same: each position in the number represents a power of the base. The only difference is that, after the comma (or decimal point), the powers become **negative** instead of positive.
+
+For example, in the decimal number **47.32₁₀**, the integer part is decomposed as:
+
+```
+(4×10¹) + (7×10⁰) = 40 + 7
+```
+
+while the fractional part uses negative exponents:
+
+```
+(3×10⁻¹) + (2×10⁻²) = 0.3 + 0.02
+```
+
+Adding both parts gives **47.32**.
+
+Now let’s look at an example in binary.  
+The number **1101.11₂** can be interpreted as:
+
+```
+(1×2³) + (1×2²) + (0×2¹) + (1×2⁰) + (1×2⁻¹) + (1×2⁻²)
+= 8 + 4 + 0 + 1 + 0.5 + 0.25
+= 13.75₁₀
+```
+
+The positional logic, therefore, stays exactly the same for the fractional part—each digit multiplies a power of the base, but with a negative exponent.
+
+---
+
+In digital systems, however, there’s a limitation: **they cannot store infinite digits**.  
+Fractional numbers must be represented using a fixed number of bits, meaning that only fractions whose denominators are powers of two can be represented exactly.  
+Any other fraction must be **approximated** to the closest possible binary value.
+
+For example:
+
+```
+0.5₁₀  = 0.1₂   (exact, because 1/2 = 2⁻¹)
+0.25₁₀ = 0.01₂  (exact, because 1/4 = 2⁻²)
+0.75₁₀ = 0.11₂  (exact, because 3/4 = 0.11₂)
+```
+
+But some very common decimal values cannot be represented exactly.  
+Take **0.1₁₀** for instance — its denominator is not a power of two.  
+When converted to binary, it becomes an infinite periodic sequence:
+
+```
+0.1₁₀ ≈ 0.00011001100110011…₂
+```
+
+Because computers have finite memory, that sequence must be **truncated or rounded**, keeping only a limited number of bits.  
+The difference between the real value and the stored value is known as **rounding error**.
+
+Although it may seem insignificant, this explains a familiar phenomenon in programming:  
+in many languages, the expression `0.1 + 0.2` produces **0.30000000000000004** instead of exactly **0.3**.  
+The computer isn’t “wrong” — it’s simply adding two binary approximations, and when converting the result back to decimal, the small accumulated rounding error becomes visible.
